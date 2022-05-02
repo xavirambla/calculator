@@ -1,0 +1,23 @@
+{
+    "language":         "Català",
+    "languageTitle":    "Llenguatge",
+    "appTitle":         "Calculadora"    ,
+    "abrirPersonalizacion": "Obrir Personalització",
+    "settingsTitle":    "Personalització",
+    "darkmode":         "Mode fosc",
+    "homeTitle":        "Calculadora",
+    "helpTitle":        "Ajuda",
+    "aboutTitle":       "Sobre mi",
+    "version":          "Versió",
+    "buildNumber":      "Número de Compilació",
+    "author":           "@ 2022 Xavi Rambla",
+    "copyright":        "Tots els drets reservats",
+    "selectLanguage":   "Selecciona Idioma",
+
+    "helpDescription1" :  "Aplicació de Calculadora.",   
+    "helpDescription2" :  "Una simple calculadora que permet realitzar operacions aritmètiques bàsiques.",
+    "helpDescription3" :  "Les operacions permeses actualment són: la suma, la resta, la multiplicació i la divisió.",
+    "helpDescription4" :  "En pròximes actualizacions ampliarem la bateria de funcionalitats."    
+
+}
+

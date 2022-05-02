@@ -1,0 +1,25 @@
+{
+    "language":             "Français",
+    "languageTitle":        "Langue",
+    "historial":            "Disque",
+    "appTitle":             "Calculatrice"    ,
+    "abrirPersonalizacion": "Ouvrir la personnalisation",
+    "settingsTitle":        "Personnalisation",
+    "darkmode":             "Mode sombre",
+    "homeTitle":            "Calculatrice",
+    "helpTitle":            "Aider",
+    "aboutTitle":           "À propos de",
+    "version":              "Version",
+    "buildNumber":          "Numéro de Construction",
+    "author":               "@ 2022 Xavi Rambla",
+    "copyright":            "Tous droits réservés"   ,
+    "selectLanguage":       "Sélectionner la langue",
+
+    "helpDescription1" :  "Demande de calculatrice.",   
+    "helpDescription2" :  "Une calculatrice simple qui vous permet d'effectuer des opérations arithmétiques de base.",
+    "helpDescription3" :  "Les opérations actuellement autorisées sont : addition, soustraction, multiplication et division.",
+    "helpDescription4" :  "Dans les futures mises à jour, nous élargirons la gamme de fonctionnalités."
+
+
+}
+

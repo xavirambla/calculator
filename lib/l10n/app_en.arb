@@ -1,0 +1,46 @@
+{
+    "language": "English",
+    "@language":{
+        "description": "The current Language"
+    },
+
+    "languageTitle": "Language",
+    "@languageTitle":{
+        "description": "Title for Language"
+    },
+
+
+    "appTitle": "Calculator",
+    "@appTitle":{
+        "description": "appTitle"
+    },
+
+    "abrirPersonalizacion": "Open Settings",
+    "@abrirPersonalizacion":{
+        "description": "abrirPersonalizacion"
+    },
+    "settingsTitle": "Settings"    ,
+    "@settingsTitle":{
+        "description": "settings"
+    },
+    "darkmode": "Dark Mode",
+    "@darkmode":{
+        "description": "Dark Mode title"
+    },
+    "homeTitle":"Calculator",
+    "helpTitle":"Help",
+    "aboutTitle":"About",
+    "version": "Version",
+    "buildNumber": "Build Number",
+    "author": "@ 2022 Xavi Rambla",
+    "copyright": "All Rights Reserved",
+    "selectLanguage":"Select Language",
+
+    "helpDescription1" :  "Calculator App.",   
+    "helpDescription2" :  "A simple calculator that allows you to perform basic arithmetic operations.",
+    "helpDescription3" :  "Operations currently allowed are: addition, subtraction, multiplication and division.",
+    "helpDescription4" :  "In future updates we will expand the range of functionalities."
+
+
+}
+
