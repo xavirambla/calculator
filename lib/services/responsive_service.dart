@@ -10,6 +10,8 @@
  *
  */
 
+import 'dart:math';
+
 import 'package:calculator/share_preferences/preferences.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +20,7 @@ class ResponsiveService {
   static late ResponsiveService instance ;  // únicamente tendremos una instancia para toda la aplicación
   static bool initialized     = false;      //nos indica si la instancia ha sido inicializada
 
-  static var sizeReferenceHeightMobile      = 680.0;  
+  static var sizeReferenceHeightMobile      = 680.0;
   static var sizeReferenceWidthMobile       = 400.0;  //1.7
 
   late BuildContext context;
@@ -38,7 +40,7 @@ class ResponsiveService {
     instance.heightCorrector  =   heightCorrectorJson;
     instance.sizeCorrector  =   sizeCorrectorJson;
     initialized               =   true;
-    
+
   }
 
   static insertContext(BuildContext context){
@@ -48,10 +50,10 @@ class ResponsiveService {
 
   factory ResponsiveService.getInstance(){
     if ( !initialized )    throw new Exception("Instancia no creada del ResponsiveService");
-      
+
     return instance;
   }
-  
+
 
 
 
@@ -72,33 +74,33 @@ Platform.isLinux
 Platform.isMacOS
 Platform.isWindows
 
-*/ 
+*/
 
 
-  
+
 /*
   static var sizeReferenceHeightTablet7     = 900.0;
   static var sizeReferenceWidthTablet7      = 600.0; //1.5
-  
 
-  static var sizeReferenceHeightTablet10    = 1200.0;  
+
+  static var sizeReferenceHeightTablet10    = 1200.0;
   static var sizeReferenceWidthTablet10     = 800.0;  //1.5
 */
 
-/* 
+/*
   Convierte el size text para hacerlo responsive
 */
    double getResponsiveText( dynamic fontSize, { BuildContext? context    ,widget ="", key="" } ){
      if ( context!=null )  {this.context= context; }
       else  { context= this.context; }
-    final language = Preferences.language;    
+    final language = Preferences.language;
     final heightScreen = MediaQuery.of(context).size.height;
-    final widthScreen = MediaQuery.of(context).size.width;  
+    final widthScreen = MediaQuery.of(context).size.width;
     //size * sizeReference / MediaQuery.of(context).size.longestSide;
 
     final proporcionWidth = widthScreen/sizeReferenceWidthMobile;
     final proporcionHeight = heightScreen/sizeReferenceHeightMobile;
-        
+
     // cogemos la menor diferencia ya que en caso contrario, podríamos salirnos de la pantalla
     final proporcion  =  proporcionHeight>proporcionWidth ? proporcionWidth : proporcionHeight;
     double newFontSize = fontSize*  proporcion ;
@@ -113,23 +115,38 @@ Platform.isWindows
 
   }
 
+
+/*
+     Devuelve el Scale Factor para un texto
+ */
+   double gettextScaleFactorResponsible(  { BuildContext? context ,widget ="", key="" } ){
+     if ( context!=null )  {this.context= context; }
+     else  { context= this.context; }
+     double shortestSide =  MediaQuery.of(context).size.shortestSide;
+     double minSide = min( sizeReferenceWidthMobile , sizeReferenceHeightMobile  );
+
+     double proporcion = shortestSide / minSide  ;
+
+     return proporcion;
+   }
+
 /* Cuando no se puede usar un widget para reemplazar el widget original , atacamos directamente al style.
 En este caso, esta función se suele usar cuando queremos reemplazar el style del textspan y hacerlo responsible.
  */
    TextStyle? generateTextStyleResponsible(  TextStyle? textStyle ,{ BuildContext? context ,widget ="", key="" } ){
-        
+
      if (textStyle==null)                 return textStyle;
      if (textStyle.fontSize== null)       return textStyle;
 
      final language = Preferences.language;
      // corregimos el valor en caso que entre en el listado de correciones
-     final keyCorrector = "$language-$widget-$key";        
+     final keyCorrector = "$language-$widget-$key";
      double fontSize = textStyle.fontSize!;
      if (textCorrector.containsKey( keyCorrector )){
         fontSize = fontSize + textCorrector[ keyCorrector]!;
-     }   
+     }
 
-     return  textStyle.copyWith( fontSize: getResponsiveText( fontSize  , context:context ));        
+     return  textStyle.copyWith( fontSize: getResponsiveText( fontSize  , context:context ));
   }
 
 /* Cuando no se puede usar un widget para reemplazar el widget original , atacamos directamente al style.
@@ -141,57 +158,57 @@ En este caso, esta función se suele usar cuando queremos reemplazar el style de
 
      if ( context!=null )  {this.context= context; }
       else  { context= this.context; }
-    final language = Preferences.language;    
+    final language = Preferences.language;
     final heightScreen = MediaQuery.of(context).size.height;
-    final widthScreen = MediaQuery.of(context).size.width;  
+    final widthScreen = MediaQuery.of(context).size.width;
     //size * sizeReference / MediaQuery.of(context).size.longestSide;
 
     final proporcionWidth = widthScreen/sizeReferenceWidthMobile;
     final proporcionHeight = heightScreen/sizeReferenceHeightMobile;
-        
+
     // cogemos la menor diferencia ya que en caso contrario, podríamos salirnos de la pantalla
     final proporcion  =  proporcionHeight>proporcionWidth ? proporcionWidth : proporcionHeight;
 
-     final keyCorrector = "$language-$widget-$key";        
+     final keyCorrector = "$language-$widget-$key";
      double size = iconThemeData.size! * proporcion;
      if (sizeCorrector.containsKey( keyCorrector )){
         size = size + sizeCorrector[ keyCorrector]!;
-     }   
-     return  iconThemeData.copyWith( size: size);    
+     }
+     return  iconThemeData.copyWith( size: size);
 
   }
 
 
 
 
-/* 
+/*
   Convierte el size  para hacerlo responsive
 */
    double getResponsiveWidthContainer(  dynamic size,{ BuildContext? context , widget ="", key="" } ){
     if ( context!=null )  {this.context= context; }
-    else  { context= this.context; } 
+    else  { context= this.context; }
 
-    final language = Preferences.language;    
+    final language = Preferences.language;
     final heightScreen = MediaQuery.of(context).size.height;
-    final widthScreen = MediaQuery.of(context).size.width;  
+    final widthScreen = MediaQuery.of(context).size.width;
     //size * sizeReference / MediaQuery.of(context).size.longestSide;
     double newSize = size*  widthScreen /sizeReferenceWidthMobile ;
   // corregimos el valor en caso que entre en el listado de correciones
     final keyCorrector = "$language-$widget-$key";
     if (widthCorrector.containsKey( keyCorrector )){
         newSize = newSize+ widthCorrector[ keyCorrector]!;
-    }    
+    }
 //    print( "widthScreen : $widthScreen  heightScreen : $heightScreen   Size: $size    newSize : $newSize "  );
     return newSize ;
   }
 
   double getResponsiveHeightContainer(  dynamic size,{ BuildContext? context ,widget ="", key="" } ){
     if ( context!=null )  {this.context= context; }
-    else  { context= this.context; }    
+    else  { context= this.context; }
 
-    final language = Preferences.language; 
+    final language = Preferences.language;
     final heightScreen = MediaQuery.of(context).size.height;
-    final widthScreen = MediaQuery.of(context).size.width;  
+    final widthScreen = MediaQuery.of(context).size.width;
     //size * sizeReference / MediaQuery.of(context).size.longestSide;
 
     double newSize = size*  heightScreen /sizeReferenceHeightMobile ;
@@ -208,3 +225,4 @@ En este caso, esta función se suele usar cuando queremos reemplazar el style de
 
 
 }
+

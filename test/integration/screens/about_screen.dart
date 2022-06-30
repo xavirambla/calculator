@@ -61,7 +61,6 @@ Método para probar todos los textos del widget en el idioma seleccionado.
         var  t = getAppLocalizations(Preferences.language);   
 
      expect(find.text( t.aboutTitle)                              , findsOneWidget);
-
      expect( find.bySemanticsLabel( t.author )   , findsOneWidget);  
      expect( find.bySemanticsLabel( t.version+" : " )                , findsOneWidget);  
      expect( find.bySemanticsLabel( t.buildNumber+" : " )  , findsOneWidget);  
@@ -183,6 +182,7 @@ Método para probar todos los textos del widget en el idioma seleccionado.
 
 
 
+  
    } );
 
 }
