@@ -165,3 +165,18 @@ dynamic checkNotifierCalled(  ChangeNotifier notifier,   Function() action, [   
     return isFired;
   }
 }
+
+
+/*
+En algunos tests , necesitamos tener el Responsive service con el context informado
+*/
+Future<void> loadContextToResponsiveService( WidgetTester tester ) async {
+      return tester.pumpWidget(
+
+      MaterialApp(
+            builder: (context, child) {
+               ResponsiveService.insertContext(context);
+              return const Text("hola");
+            })    
+      );
+}

@@ -85,10 +85,10 @@ class _InfoForm extends StatefulWidget {
 }
 
 class _InfoFormState extends State<_InfoForm> {
-  String appName ="";
-  String packageName = "";
-  String version ="";
-  String buildNumber= "";
+  String appName      =   "";
+  String packageName  =   "";
+  String version      =   "";
+  String buildNumber  =   "";
 
   @override
   initState() {
@@ -126,7 +126,7 @@ class _InfoFormState extends State<_InfoForm> {
                   style: ResponsiveService.getInstance().generateTextStyleResponsible (currentTheme.textTheme.bodyText1, context:context),
                   children: <TextSpan>[
                     TextSpan(text: label ),
-                    TextSpan(text: value, style: ResponsiveService.getInstance().generateTextStyleResponsible ( TextStyle(fontWeight: FontWeight.bold), context:context ) ) ,
+                    TextSpan(text: value, style: ResponsiveService.getInstance().generateTextStyleResponsible ( const TextStyle(fontWeight: FontWeight.bold), context:context ) ) ,
                 ]                
                 ),
               );
@@ -143,7 +143,7 @@ class _InfoFormState extends State<_InfoForm> {
     return  Column(
           children: [
               const SizedBox(height: 10,),
-              ResponsiveText(appName, style:currentTheme.textTheme.headline1 ),
+              ResponsiveText(appName , style:currentTheme.textTheme.headline1 ),
               const SizedBox(height: 10,),     
 
               getRichText(t!.version +' : ', version),

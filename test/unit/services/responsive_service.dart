@@ -7,10 +7,10 @@ import '../../integration/configuration.dart';
 
 
 void main() {
-    
+
 
   group( "Responsive Service", () {
-    
+
     test("Create" ,() {
       ResponsiveService.create({}, {}, {}, {});
 
@@ -18,15 +18,15 @@ void main() {
 
     test("Get Instance" ,() {
       ResponsiveService.create({}, {}, {}, {});
-      ResponsiveService instance = ResponsiveService.getInstance(); 
+      ResponsiveService instance = ResponsiveService.getInstance();
         expect( instance, isNotNull);
     });
 
     test("Same Instance" ,() {
       ResponsiveService.create({}, {}, {}, {});
-      ResponsiveService instance = ResponsiveService.getInstance(); 
+      ResponsiveService instance = ResponsiveService.getInstance();
 
-      ResponsiveService instance1 = ResponsiveService.getInstance(); 
+      ResponsiveService instance1 = ResponsiveService.getInstance();
         expect( instance, instance1 );
     });
 
@@ -36,7 +36,7 @@ void main() {
 
       Map<String, dynamic> element = { "fr-widgetName-" : 10.0 };
       ResponsiveService.create( element , {}, {}, {});
-      ResponsiveService instance = ResponsiveService.getInstance(); 
+      ResponsiveService instance = ResponsiveService.getInstance();
       expect( instance, isNotNull);
       expect( instance.textCorrector.isNotEmpty , true);
       expect ( instance.textCorrector.keys.contains("fr-widgetName-"),true);
@@ -47,7 +47,7 @@ void main() {
 
       Map<String, dynamic> element = { "fr-widgetName-" : 10.0 };
       ResponsiveService.create( {},element , {}, {});
-      ResponsiveService instance = ResponsiveService.getInstance(); 
+      ResponsiveService instance = ResponsiveService.getInstance();
       expect( instance, isNotNull);
       expect( instance.widthCorrector.isNotEmpty , true);
       expect ( instance.widthCorrector.keys.contains("fr-widgetName-"),true);
@@ -59,7 +59,7 @@ void main() {
 
       Map<String, dynamic> element = { "fr-widgetName-" : 10.0 };
       ResponsiveService.create( {}, {},element , {});
-      ResponsiveService instance = ResponsiveService.getInstance(); 
+      ResponsiveService instance = ResponsiveService.getInstance();
       expect( instance, isNotNull);
       expect( instance.heightCorrector.isNotEmpty , true);
       expect ( instance.heightCorrector.keys.contains("fr-widgetName-"),true);
@@ -70,24 +70,26 @@ void main() {
 
       Map<String, dynamic> element = { "fr-widgetName-" : 10.0 };
       ResponsiveService.create( {}, {}, {},element );
-      ResponsiveService instance = ResponsiveService.getInstance(); 
+      ResponsiveService instance = ResponsiveService.getInstance();
       expect( instance, isNotNull);
       expect( instance.sizeCorrector.isNotEmpty , true);
       expect ( instance.sizeCorrector.keys.contains("fr-widgetName-"),true);
     });
 
 
+
+
     test("Create with TextCorrector - Check correctors" ,() {
 
       Map<String, dynamic> element = { "fr-widgetName-" : 10.0 };
       ResponsiveService.create( element , {}, {} , {} );
-      ResponsiveService instance = ResponsiveService.getInstance(); 
+      ResponsiveService instance = ResponsiveService.getInstance();
       expect( instance, isNotNull);
       expect( instance.textCorrector.isNotEmpty , true);
       expect ( instance.textCorrector.keys.contains("fr-widgetName-"),true);
       expect ( instance.widthCorrector.keys.contains("fr-widgetName-"),false);
       expect ( instance.heightCorrector.keys.contains("fr-widgetName-"),false);
-      expect ( instance.sizeCorrector.keys.contains("fr-widgetName-"),false);      
+      expect ( instance.sizeCorrector.keys.contains("fr-widgetName-"),false);
     });
 
 
@@ -95,7 +97,7 @@ void main() {
 
       Map<String, dynamic> element = { "fr-widgetName-" : 10.0 };
       ResponsiveService.create( {},element , {}, {} );
-      ResponsiveService instance = ResponsiveService.getInstance(); 
+      ResponsiveService instance = ResponsiveService.getInstance();
       expect( instance, isNotNull);
       expect( instance.widthCorrector.isNotEmpty , true);
       expect ( instance.widthCorrector.keys.contains("fr-widgetName-"),true);
@@ -111,7 +113,7 @@ void main() {
 
       Map<String, dynamic> element = { "fr-widgetName-" : 10.0 };
       ResponsiveService.create( {}, {},element, {} );
-      ResponsiveService instance = ResponsiveService.getInstance(); 
+      ResponsiveService instance = ResponsiveService.getInstance();
       expect( instance, isNotNull);
       expect( instance.heightCorrector.isNotEmpty , true);
       expect ( instance.heightCorrector.keys.contains("fr-widgetName-"),true);
@@ -128,7 +130,7 @@ void main() {
 
       Map<String, dynamic> element = { "fr-widgetName-" : 10.0 };
       ResponsiveService.create( {}, {}, {},element );
-      ResponsiveService instance = ResponsiveService.getInstance(); 
+      ResponsiveService instance = ResponsiveService.getInstance();
       expect( instance, isNotNull);
       expect( instance.sizeCorrector.isNotEmpty , true);
       expect ( instance.sizeCorrector.keys.contains("fr-widgetName-"),true);
@@ -140,14 +142,14 @@ void main() {
     });
 
 
-/* 
-Falla pq no tiene el context
-    test("generateActionsIconThemeResponsible " ,() {
+  testWidgets('generateActionsIconThemeResponsible', (WidgetTester tester) async {
+      //construimos un widget cualquiera para obtener un context válido
+      await loadContextToResponsiveService(  tester ) ;
 
      IconThemeData? res  = ResponsiveService.getInstance().generateActionsIconThemeResponsible( const IconThemeData( size: 25, ) );
      expect( res, isNotNull);
     });
-*/
+
     test("generateActionsIconThemeResponsible without style" ,() {
 
      IconThemeData? res  = ResponsiveService.getInstance().generateActionsIconThemeResponsible( null );
@@ -160,14 +162,31 @@ Falla pq no tiene el context
      expect( res, isNotNull);
     });
 
-/*
-Falla pq no tiene el context
-    test("generateActionsIconThemeResponsible - Check correctors using widgetname" ,() {
+
+
+  testWidgets('gettextScaleFactorResponsible', (WidgetTester tester) async {
+
+      Map<String, dynamic> element = { "fr-widgetName-" : 10.0 };
+      ResponsiveService.create( {}, {}, {},element );
+      ResponsiveService instance = ResponsiveService.getInstance();
+
+      //construimos un widget cualquiera para obtener un context válido
+      await loadContextToResponsiveService(  tester ) ;
+      
+      expect( instance, isNotNull);
+      double scale = instance.gettextScaleFactorResponsible( );
+      expect( scale>0 , true);
+    });
+
+
+  testWidgets('generateActionsIconThemeResponsible - Check correctors using widgetname', (WidgetTester tester) async {
+//    test("generateActionsIconThemeResponsible - Check correctors using widgetname" ,() {
       Preferences.language="fr";
 
       Map<String, dynamic> element = { "fr-widgetName-" : 10.0 };
       ResponsiveService.create( {}, {}, {},element );
-
+      //construimos un widget cualquiera para obtener un context válido
+      await loadContextToResponsiveService(  tester ) ;
 
 
      IconThemeData? res  = ResponsiveService.getInstance().generateActionsIconThemeResponsible( const IconThemeData( size: 25, ) );
@@ -180,14 +199,12 @@ Falla pq no tiene el context
 
     });
 
-
-    test("generateActionsIconThemeResponsible - Check correctors using key" ,() {
+  testWidgets('generateActionsIconThemeResponsible - Check correctors using key', (WidgetTester tester) async {   
       Preferences.language="fr";
-
       Map<String, dynamic> element = { "fr--123" : 10.0 };
       ResponsiveService.create( {}, {}, {},element );
-
-
+      //construimos un widget cualquiera para obtener un context válido
+      await loadContextToResponsiveService(  tester ) ;
 
      IconThemeData? res  = ResponsiveService.getInstance().generateActionsIconThemeResponsible( const IconThemeData( size: 25, ) );
      expect( res, isNotNull);
@@ -195,93 +212,89 @@ Falla pq no tiene el context
      IconThemeData? res1  = ResponsiveService.getInstance().generateActionsIconThemeResponsible( const IconThemeData( size: 25, ), key: "123" );
   // si son diferentes es que se ha realizado la corrección solciitada
     expect( res!=res1, true);
-
-
     });
-*/
-/*
-Falla pq no tiene el context
- 
-    test("generateTextStyleResponsible " ,() {
 
+  testWidgets('generateTextStyleResponsible', (WidgetTester tester) async {    
+      //construimos un widget cualquiera para obtener un context válido
+      await loadContextToResponsiveService(  tester ) ;
      TextStyle? res  = ResponsiveService.getInstance().generateTextStyleResponsible( const  TextStyle(fontSize: 10)  );
      expect( res, isNotNull);
     });
 
-    test("generateTextStyleResponsible without style" ,() {
+  testWidgets('generateTextStyleResponsible without style', (WidgetTester tester) async {    
+     //construimos un widget cualquiera para obtener un context válido
+     await loadContextToResponsiveService(  tester ) ;   
 
      TextStyle? res  = ResponsiveService.getInstance().generateTextStyleResponsible(  null );
      expect( res, isNull);
     });
 
-    test("generateTextStyleResponsible without size" ,() {
+
+    
+    testWidgets('generateTextStyleResponsible without size', (WidgetTester tester) async {          
+     //construimos un widget cualquiera para obtener un context válido
+     await loadContextToResponsiveService(  tester ) ;   
 
      TextStyle? res  = ResponsiveService.getInstance().generateTextStyleResponsible( const  TextStyle(color: Colors.amber)  );
      expect( res, isNotNull);
     });
 
 
-    test("generateTextStyleResponsible - Check correctors using widgetname" ,() {
-      Preferences.language="fr";
-
+    testWidgets('generateTextStyleResponsible - Check correctors using widgetname', (WidgetTester tester) async { 
       Map<String, dynamic> element = { "fr-widgetName-" : 10.0 };
       ResponsiveService.create( {}, {}, {},element );
+     //construimos un widget cualquiera para obtener un context válido
+     await loadContextToResponsiveService(  tester ) ;       
+      Preferences.language="fr";
 
+      TextStyle? res  = ResponsiveService.getInstance().generateTextStyleResponsible( const  TextStyle(fontSize: 10)  );
+      expect( res, isNotNull);
 
-
-    TextStyle? res  = ResponsiveService.getInstance().generateTextStyleResponsible( const  TextStyle(fontSize: 10)  );
-     expect( res, isNotNull);
-
-     TextStyle? res1  = ResponsiveService.getInstance().generateTextStyleResponsible( const  TextStyle(fontSize: 10), widget: "widgetName"  );
+      TextStyle? res1  = ResponsiveService.getInstance().generateTextStyleResponsible( const  TextStyle(fontSize: 10), widget: "widgetName"  );
   // si son diferentes es que se ha realizado la corrección solciitada
-    expect( res!=res1, true);
-
+      expect( res==res1, true);
 
     });
 
-
-    test("generateTextStyleResponsible - Check correctors using key" ,() {
+    testWidgets('generateTextStyleResponsible - Check correctors using key', (WidgetTester tester) async { 
       Preferences.language="fr";
 
       Map<String, dynamic> element = { "fr--123" : 10.0 };
       ResponsiveService.create( {}, {}, {},element );
+     //construimos un widget cualquiera para obtener un context válido
+     await loadContextToResponsiveService(  tester ) ;   
 
-
-
-    TextStyle? res  = ResponsiveService.getInstance().generateTextStyleResponsible( const  TextStyle(fontSize: 10)  );
+     TextStyle? res  = ResponsiveService.getInstance().generateTextStyleResponsible( const  TextStyle(fontSize: 10)  );
      expect( res, isNotNull);
 
      TextStyle? res1  = ResponsiveService.getInstance().generateTextStyleResponsible( const  TextStyle(fontSize: 10), key: "123"  );
   // si son diferentes es que se ha realizado la corrección solciitada
-    expect( res!=res1, true);
-
-
+    expect( res==res1, true);
     });
-*/
-    
-/*
-     
+
     testWidgets('getResponsiveText', (WidgetTester tester) async {
-      ResponsiveService.create( {}, {}, {} );
-      await tester.pumpWidget(  makeTesteableWidget( child:   
+      ResponsiveService.create( {}, {}, {} , {});
+      await tester.pumpWidget(  makeTesteableWidget( child:
         Builder(
           builder: (BuildContext context) {
-     //  Preferences.language="es";            
-   //        var newValue = ResponsiveService.getInstance().getResponsiveText(context, 10);    
-              var newValue =10;        
+     //  Preferences.language="es";
+   //        var newValue = ResponsiveService.getInstance().getResponsiveText(context, 10);
+              var newValue =10;
             expect(newValue , 10);
             return const Text("");
           },
         ),
       ));
-      
+
     });
 
-*/
+
 
   });
 
 
 
-}      
+}
+
+
 
